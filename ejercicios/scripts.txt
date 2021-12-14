@@ -1,0 +1,4 @@
+npm init -y
+npm i -S express
+npm i -S sequelize mariadb
+npm instal -d nodemon

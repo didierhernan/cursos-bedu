@@ -1,0 +1,7 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/cmder
+/cmder/*
+/Javascript-Y-Backend-Con-Node-Ditcher-Neira
+cmder.zip
