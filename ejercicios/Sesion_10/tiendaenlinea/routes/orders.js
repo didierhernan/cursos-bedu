@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../db');
-
+const permission = require("../middlewares/permissions")
 
 // Get all orders
-router.get('/',  async (req, res) => {
+router.get('/', permission('admin'),  async (req, res) => {
  const orders = await sequelize.models.orders.findAndCountAll();
  return res.status(200).json({ data: orders });
      
 });
 
 // Creating a new order
-router.post('/',  async (req, res) => {
+router.post('/', permission('admin', 'client'),  async (req, res) => {
     const { body } = req;
     const order = await sequelize.models.orders.create({
         userId: body.userId,
@@ -23,7 +23,7 @@ router.post('/',  async (req, res) => {
 });
 
 // Update a order by id put
-router.put('/:id',  async (req, res) => {
+router.put('/:id', permission('admin', 'client'),  async (req, res) => {
 const { body, params: { id } } = req;
 const order = await sequelize.models.orders.findByPk(id);
 if (!order) {
@@ -41,7 +41,7 @@ if (!order) {
 
 
 // Delete a order by id
-router.delete('/:id',  async (req, res) => {
+router.delete('/:id',  permission('admin'), async (req, res) => {
     const { params: { id } } = req;
     const order = await sequelize.models.orders.findByPk(id);
     if (!order) {
