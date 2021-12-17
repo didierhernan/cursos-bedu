@@ -6,7 +6,7 @@ module.exports = (sequelize) => sequelize.define('reviews', {
   content: DataTypes.TEXT,
   // Rel ==  Producto y la reseña
    productId: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     references: {
       model: 'products',
       key: 'id',

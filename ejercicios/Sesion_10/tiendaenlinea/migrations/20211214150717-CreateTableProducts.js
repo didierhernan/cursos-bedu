@@ -9,11 +9,11 @@ module.exports = {
       price: Sequelize.FLOAT,
       image: Sequelize.STRING,
       createdAt: Sequelize.DATE,
-      updatedAt: Sequelize.DATE
+      updatedAt: Sequelize.DATE,
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('products');
+     await queryInterface.dropTable('products');
   }
 };

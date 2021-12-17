@@ -3,11 +3,11 @@ const Sequilize = require('sequelize')
 // Exporting models
 const Product = require('./models/Product');
 const Review = require('./models/Review');
-const Order = require('../models/Order')
-const User = require('../models/User')
+const Order = require('./models/Order');
+const User = require('./models/User');
 
 // Database connection
-const sequelize = new Sequilize('ecommerce-api','root','D1d13r-82$',{
+const sequelize = new Sequilize('tienda_linea','tienda_linea','t13nd4-l1n3a$',{
     host:'localhost',
     dialect: 'mariadb',
     logging: false

@@ -28,17 +28,3 @@ module.exports = (sequelize) => {
   return User;
 
 }
-
-//Resultado usando bcrypt
-// {
-//     "data": {
-//       "id": 2,
-//       "name": "John",
-//       "lastname": "Doe",
-//       "type": "client",
-//       "email": "john.doe@web.com",
-//       "password": "$2b$10$2DilyYYJsJl7Bs8ZwAC7CusYplg7kVueJSG1rCDRi8vKeAXNmGVUi",
-//       "updatedAt": "2020-10-08T13:49:27.573Z",
-//       "createdAt": "2020-10-08T13:49:27.573Z"
-//     }
-//   }

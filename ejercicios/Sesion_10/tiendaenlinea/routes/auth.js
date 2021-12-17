@@ -4,7 +4,7 @@ const sequelize = require('../db');
 const jwt = require('jsonwebtoken');
 
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { body } = req;
 
   const user = await sequelize.models.users.findOne({
@@ -34,11 +34,11 @@ router.post('/login', (req, res) => {
 
 });
 
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
 
   const { body } = req;
 
-  const user = await sequelize.models.users.findOne({
+  var user = await sequelize.models.users.findOne({
     where: {
       email: body.email
     }
@@ -49,8 +49,8 @@ router.post('/signup', (req, res) => {
   }
 
   user = await sequelize.models.users.create({
-    nmae: body.name,
-    lastname: body.lasname,
+    name: body.name,
+    lastname: body.lastname,
     email: body.email,
     type: 'client',
     password: body.password

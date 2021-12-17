@@ -1,0 +1,10 @@
+{
+    "development": {
+        "username": "tienda_linea",
+        "password": "t13nd4-l1n3a$",
+        "database": "tienda_linea",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "dialect": "mariadb"
+    }
+}
