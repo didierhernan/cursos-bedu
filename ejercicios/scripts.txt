@@ -1,8 +1,0 @@
-npm init -y
-npm i -S express
-npm i -S sequelize mariadb
-npm instal -d nodemon
-
-./node_modules/.bin/sequelize migration:create --name CreateTableUsers
-./node_modules/.bin/sequelize migration:create --name CreateTableReviews
-./node_modules/.bin/sequelize migration:create --name CreateTableOrders
