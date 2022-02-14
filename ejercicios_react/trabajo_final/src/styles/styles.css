@@ -1,0 +1,54 @@
+.ruta-egan{ 
+    display:flex;
+    width: 80%;
+    height: 80%;
+    margin: 4rem;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 10px;    
+    color: rgb(255, 255, 255);     
+}
+
+.ruta-nairo{ 
+    display:flex;
+    width: 80%;
+    height: 80%;
+    margin: 4rem;
+    flex-direction: column;
+    background-color: rgb(226, 11, 11);
+    text-align: center;
+    padding: 10px;
+    color: rgb(0, 0, 0); 
+}
+
+.mtb-leonardo{ 
+    display:flex;
+    width: 80%;
+    height: 80%;
+    margin: 4rem;
+    flex-direction: column;
+    background-color: rgb(8, 113, 173);
+    text-align: center;
+    padding: 10px;
+    color: rgb(24, 23, 23); 
+}
+
+.mtb-valentina{ 
+    display:flex;
+    width: 80%;
+    height: 80%;
+    margin: 4rem;
+    flex-direction: column;
+    background-color: rgb(61, 226, 11);
+    text-align: center;
+    padding: 10px;
+    color: rgb(0, 0, 0); 
+}
+
+.images{ 
+    display:flex;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+}

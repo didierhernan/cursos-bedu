@@ -1,0 +1,5 @@
+## Instalar Reacr con template para PWA.  Despues realizar las configuraciones correspondientes
+npx create-react-app . --template cra-template-pwa
+npm install react-app-rewired
+## Instalar React Router.  Version 5 ya que version 6 withRouter esta deprecated
+npm install react-router-dom@5.3.0
