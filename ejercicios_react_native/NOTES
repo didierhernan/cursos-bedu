@@ -6,3 +6,33 @@ Prettier - Code formatter
 Material Icon Theme
 GitLens — Git supercharged
 Night Owl
+
+npm install --global expo-cli
+
+blank
+
+# Crear un nuevo proyecto de react-native
+npx react-native init sesion2
+expo init app
+npx react-native run-ios
+
+brew install android-platform-tools
+adb devices
+adb -s 85637bbf reverse tcp:8081 tcp:8081
+
+Limpiar el gradlew
+ir a Android ./gradlew clean
+
+react-native run-android --port 8084
+
+npx react-native run-android --no-jetifier
+
+Adicionar 
+ANDROID_SDK_ROOT=C:\Users\dbenjumea\AppData\Local\Android\Sdk
+
+
+./gradlew.bat installDebug
+
+
+ATAJO
+rnf
