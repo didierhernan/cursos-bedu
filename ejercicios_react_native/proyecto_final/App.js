@@ -1,11 +1,32 @@
-import React from "react";
-import {View, Text, TouchableOpacity} from 'react-native'
-import Home from './src/screens/container/Home'
+import React from 'react';
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import {createSwitchNavigator} from '@react-navigation/compat';
+import Loading from './src/sections/components/loading';
+import Login from './src/screens/container/Login';
+import DrawerNavigation from './src/navigation/DrawerNavigation';
+import favoritesReducer from './src/reducers/FavoritesReducer'
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 
-export default function App (){
-  return(
-    <View>
-      <Home/>
-    </View>
+const store = createStore(favoritesReducer);
+function App(props) {
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <SwitchNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 }
+const SwitchNavigator = createSwitchNavigator(
+  {
+    Loading: {screen: Loading},
+    DrawerNavigation: DrawerNavigation,
+    Login: Login,
+  },
+  {
+    initialRouteName: 'Login',
+  },
+);
+export default App;
