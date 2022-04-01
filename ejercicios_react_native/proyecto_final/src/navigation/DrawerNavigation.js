@@ -12,7 +12,6 @@ import Profile from '../screens/container/Profile';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Hello from '../sections/components/hello';
 
-
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
@@ -22,8 +21,11 @@ const DrawerNavigator = () => {
       Store.remove({
         key: 'userLogin',
       });
-      navigation.navigate('Login');
+      navigation.navigate('Login',{
+        title:'Login-Test'
+      });
     };
+
     return (
       <DrawerContentScrollView {...props}>
         <Hello/>
@@ -33,7 +35,7 @@ const DrawerNavigator = () => {
           label="Cerrar Sesión"
           onPress={handleClose}
           icon = {()=>(<Icon name="times-circle" size={20} style={styles.drawerInActive} />)}
-        />        
+        />
       </DrawerContentScrollView>
     );
   }
@@ -47,7 +49,7 @@ const DrawerNavigator = () => {
         name="Home"
         component={NavigationTab}
         options={{
-          title: 'Tu app de pels',
+          title: 'Tu app de pelis',
           drawerIcon: ({focused}) => (
             <Icon
               name="film"

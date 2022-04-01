@@ -13,68 +13,93 @@ import {
 import 'react-native-gesture-handler';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {useNavigation} from '@react-navigation/native';
-import {useFormik} from 'formik';
+import {Formik, useFormik} from 'formik';
+import * as yup from 'yup';
+
+const loginValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Por favor ingresar un email válido')
+    .required('El email es requerido'),
+  password: yup
+    .string()
+    .min(8, ({min}) => `La contraseña debe tener al menos ${min} carácteres`)
+    .required('La contraseña es requerida'),
+});
 
 const Login = () => {
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-
-    onSubmit: values => {
-      // eslint-disable-next-line no-alert
-      login(values.email, values.password);
-    },
-  });
   const [loading, setLoading] = useState();
   const navigation = useNavigation();
+
   function login(emailUser, passwordUser) {
-    //Login exitoso
     setLoading(false);
     navigation.navigate('DrawerNavigation');
   }
 
   return (
-    <ImageBackground
-      source={require('../../../assets/background.jpg')}
-      style={styles.image}>
-      <SafeAreaView style={styles.container}>
-        <Image
-          source={require('../../../assets/movie-central.png')}
-          style={styles.logo}
-        />
-        <Text style={styles.textByGroupar}>¡Hola! Ingresa aqui:</Text>        
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Ingresa tu email"
-            placeholderTextColor="white"
-            onChangeText={formik.handleChange('email')}
-            value={formik.values.email}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Ingresa tu contraseña"
-            placeholderTextColor="white"
-            secureTextEntry={true}
-            onChangeText={formik.handleChange('password')}
-            value={formik.values.password}
-          />
-          <TouchableOpacity onPress={formik.handleSubmit} style={styles.button}>
-            {loading ? (
-              <Spinner
-                visible={true}
-                textContent={'Loading...'}
-                textStyle={styles.spinnerTextStyle}
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+      }}
+      validationSchema={loginValidationSchema}
+      onSubmit={values =>
+        // eslint-disable-next-line no-alert
+        login(values.email, values.password)
+      }>
+      {({handleChange, handleBlur, handleSubmit, values, errors, isValid}) => (
+        <ImageBackground
+          source={require('../../../assets/background.jpg')}
+          style={styles.image}>
+          <SafeAreaView style={styles.container}>
+            <Image
+              source={require('../../../assets/movie-central.png')}
+              style={styles.logo}
+            />
+            <Text style={styles.textByGroupar}>¡Hola! Ingresa aqui:</Text>
+            <View>
+              <TextInput
+                style={styles.input}
+                placeholder="Ingresa tu email"
+                placeholderTextColor="white"
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
               />
-            ) : (
-              <Text style={styles.buttonLabel}>Iniciar Sesión</Text>
-            )}
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    </ImageBackground>
+              {errors.email && (
+                <Text style={{fontSize: 10, color: 'red'}}>{errors.email}</Text>
+              )}
+              <TextInput
+                style={styles.input}
+                placeholder="Ingresa tu contraseña"
+                placeholderTextColor="white"
+                secureTextEntry={true}
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+              />
+              {errors.password && (
+                <Text style={{fontSize: 10, color: 'red'}}>
+                  {errors.password}
+                </Text>
+              )}
+
+              <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+                {loading ? (
+                  <Spinner
+                    visible={true}
+                    textContent={'Loading...'}
+                    textStyle={styles.spinnerTextStyle}
+                  />
+                ) : (
+                  <Text style={styles.buttonLabel}>Iniciar Sesión</Text>
+                )}
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
+        </ImageBackground>
+      )}
+    </Formik>
   );
 };
 const styles = StyleSheet.create({
@@ -85,13 +110,13 @@ const styles = StyleSheet.create({
   textByGroupar: {
     marginTop: 20,
     fontSize: 18,
-    marginBottom: 30
+    marginBottom: 30,
   },
   logo: {
     width: 250,
     height: 300,
     resizeMode: 'contain',
-    marginTop: 50,  
+    marginTop: 50,
   },
   spinnerTextStyle: {
     color: '#FFF',
