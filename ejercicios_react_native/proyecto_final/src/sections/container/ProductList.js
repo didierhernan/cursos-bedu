@@ -21,12 +21,8 @@ window.server = createServer({
           {id: 1, name: 'Inception', year: 2010, description: 'Lorem ipsum'},
           {id: 2, name: 'Interstellar', year: 2014, description: 'Lorem ipsum'},
           {id: 3, name: 'Dunkirk', year: 2017, description: 'Lorem ipsum'},
-          {
-            id: 4,
-            name: 'The Dark Knight',
-            year: 2008,
-            description: 'Lorem ipsum',
-          },
+          {id: 4, name: 'Dunkirk', year: 2017, description: 'Lorem ipsum'},
+          {id: 5, name: 'Dunkirk', year: 2017, description: 'Lorem ipsum'},                    
         ],
       };
     });

@@ -5,7 +5,7 @@ import {Text, StyleSheet, ImageBackground} from 'react-native';
 function ProductListLayout(props) {
   return (
     <ImageBackground
-      source={require('../../assets/background.png')}
+      source={require('../../assets/background.jpg')}
       style={styles.container}>
       <Text style={styles.title}>{props.title}</Text>
       {props.children}

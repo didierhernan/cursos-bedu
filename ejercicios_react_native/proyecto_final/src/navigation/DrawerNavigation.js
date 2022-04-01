@@ -47,10 +47,10 @@ const DrawerNavigator = () => {
         name="Home"
         component={NavigationTab}
         options={{
-          title: 'Inicio',
+          title: 'Tu app de pels',
           drawerIcon: ({focused}) => (
             <Icon
-              name="home"
+              name="film"
               style={[focused ? styles.drawerActive : styles.drawerInActive]}
               size={20}
 

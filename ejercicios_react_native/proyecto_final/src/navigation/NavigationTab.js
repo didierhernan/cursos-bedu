@@ -30,7 +30,7 @@ const TabLayout = () => {
         }}
       />
       {/* Tab-SearchScreen */}
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Friends"
         component={FriendsScreen}
         options={{
@@ -39,7 +39,7 @@ const TabLayout = () => {
             <Icon name="star" size={23} style={[focused ? styles.drawerActive : styles.drawerInActive]} /> //color={color}
           ),
         }}
-      />
+      /> */}
       {/* Tab-DealsScreen */}
       <Tab.Screen
         name="Home"
@@ -58,7 +58,7 @@ const TabLayout = () => {
           headerShown: false,
           tabBarLabel: 'Notas',
           tabBarIcon: (focused,color, size) => (
-            <Icon name="note" size={23} style={[focused ? styles.drawerActive : styles.drawerInActive]} /> //color={color}
+            <Icon name="sticky-note" size={23} style={[focused ? styles.drawerActive : styles.drawerInActive]} /> //color={color}
           ),
         }}
       />

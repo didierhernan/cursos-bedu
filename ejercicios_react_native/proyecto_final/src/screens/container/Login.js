@@ -37,24 +37,25 @@ const Login = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/background.png')}
+      source={require('../../../assets/background.jpg')}
       style={styles.image}>
       <SafeAreaView style={styles.container}>
         <Image
-          source={require('../../../assets/bedu.png')}
+          source={require('../../../assets/movie-central.png')}
           style={styles.logo}
         />
+        <Text style={styles.textByGroupar}>¡Hola! Ingresa aqui:</Text>        
         <View>
           <TextInput
             style={styles.input}
-            placeholder="Email users"
+            placeholder="Ingresa tu email"
             placeholderTextColor="white"
             onChangeText={formik.handleChange('email')}
             value={formik.values.email}
           />
           <TextInput
             style={styles.input}
-            placeholder="Contraseña"
+            placeholder="Ingresa tu contraseña"
             placeholderTextColor="white"
             secureTextEntry={true}
             onChangeText={formik.handleChange('password')}
@@ -72,7 +73,6 @@ const Login = () => {
             )}
           </TouchableOpacity>
         </View>
-        <Text style={styles.textByGroupar}>React Native</Text>
       </SafeAreaView>
     </ImageBackground>
   );
@@ -83,18 +83,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textByGroupar: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    marginTop: 50,
+    marginTop: 20,
     fontSize: 18,
+    marginBottom: 30
   },
   logo: {
-    width: 300,
+    width: 250,
     height: 300,
     resizeMode: 'contain',
-    marginTop: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 50,  
   },
   spinnerTextStyle: {
     color: '#FFF',
@@ -115,18 +112,19 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
     marginTop: 5,
-    width: 350,
-    height: 60,
+    width: 300,
+    height: 45,
     paddingHorizontal: 10,
     borderRadius: 5,
     fontSize: 18,
-    backgroundColor: '#838383',
+    backgroundColor: '#B3B4B4',
     color: 'white',
   },
   button: {
-    backgroundColor: '#99c84a',
+    backgroundColor: '#3AA66C',
     borderRadius: 5,
     marginTop: 20,
+    width: 150,
   },
   buttonLabel: {
     color: 'white',
