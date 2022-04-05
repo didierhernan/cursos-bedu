@@ -14,9 +14,13 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import { userActions } from '../../actions/UserActions';
-import { connect, useDispatch } from 'react-redux';
+import {userActions} from '../../actions/UserActions';
+import {connect, useDispatch} from 'react-redux';
 import store from '../../store/store';
+
+function sleep(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -29,14 +33,20 @@ const loginValidationSchema = yup.object().shape({
     .required('La contraseña es requerida'),
 });
 
-const Login = (props) => {
+const Login = props => {
   const [loading, setLoading] = useState();
   const navigation = useNavigation();
 
   function login(emailUser, passwordUser) {
     setLoading(false);
-    props.loginAction(emailUser, passwordUser).then(console.log("Logueado ahora?",store.getState().user.isLoggedIn))
-    navigation.navigate('DrawerNavigation');
+    props.loginAction(emailUser, passwordUser);
+    sleep(500).then(() => {
+      if (store.getState().user.isLoggedIn) {
+        navigation.navigate('DrawerNavigation');
+      } else {
+        alert('Credenciales invalidas');
+      }
+    });
   }
 
   return (
@@ -175,16 +185,13 @@ const styles = StyleSheet.create({
   },
 });
 
-
-function mapState(state){
+function mapState(state) {
   const {isLoggedIn} = state.user;
-  return {isLoggedIn}
+  return {isLoggedIn};
 }
 
 const actionCreators = {
-  loginAction: userActions.login
-}
+  loginAction: userActions.login,
+};
 
-export default connect(mapState, actionCreators)(Login)
-
-
+export default connect(mapState, actionCreators)(Login);
