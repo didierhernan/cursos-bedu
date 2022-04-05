@@ -5,11 +5,12 @@ import {createSwitchNavigator} from '@react-navigation/compat';
 import Loading from './src/sections/components/loading';
 import Login from './src/screens/container/Login';
 import DrawerNavigation from './src/navigation/DrawerNavigation';
-import favoritesReducer from './src/reducers/FavoritesReducer'
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import { makeServer } from './src/mocks/mockAPIService';
+import store from './src/store/store';
 
-const store = createStore(favoritesReducer);
+makeServer()
+
 function App(props) {
   return (
     <Provider store={store}>

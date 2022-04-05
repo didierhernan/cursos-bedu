@@ -2,18 +2,18 @@ import {StyleSheet, View} from 'react-native';
 import React, {Component} from 'react';
 import { Image, Text } from 'react-native-elements';
 
-export default class Hello extends Component {
-  render() {
+const hello = (props) => {
     return (
         <View style={styles.container}>
           <View style={styles.box}>
-            <Image style={styles.profileImage} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
-            <Text style={styles.name}>Bienvenido{"\n"}John Doe</Text>
+            <Image style={styles.profileImage} source={{uri: props.photo}}/>
+            <Text style={styles.name}>Bienvenido{"\n"}{props.name}</Text>
           </View>
           </View>
     );
-  }
 }
+
+export default hello
 
 const styles = StyleSheet.create({
     container:{

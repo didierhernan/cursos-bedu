@@ -8,13 +8,15 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import 'react-native-gesture-handler';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {useNavigation} from '@react-navigation/native';
-import {Formik, useFormik} from 'formik';
+import {Formik} from 'formik';
 import * as yup from 'yup';
+import { userActions } from '../../actions/UserActions';
+import { connect, useDispatch } from 'react-redux';
+import store from '../../store/store';
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -27,12 +29,13 @@ const loginValidationSchema = yup.object().shape({
     .required('La contraseña es requerida'),
 });
 
-const Login = () => {
+const Login = (props) => {
   const [loading, setLoading] = useState();
   const navigation = useNavigation();
 
   function login(emailUser, passwordUser) {
     setLoading(false);
+    props.loginAction(emailUser, passwordUser).then(console.log("Logueado ahora?",store.getState().user.isLoggedIn))
     navigation.navigate('DrawerNavigation');
   }
 
@@ -43,10 +46,7 @@ const Login = () => {
         password: '',
       }}
       validationSchema={loginValidationSchema}
-      onSubmit={values =>
-        // eslint-disable-next-line no-alert
-        login(values.email, values.password)
-      }>
+      onSubmit={values => login(values.email, values.password)}>
       {({handleChange, handleBlur, handleSubmit, values, errors, isValid}) => (
         <ImageBackground
           source={require('../../../assets/background.jpg')}
@@ -67,7 +67,7 @@ const Login = () => {
                 value={values.email}
               />
               {errors.email && (
-                <Text style={{fontSize: 10, color: 'red'}}>{errors.email}</Text>
+                <Text style={styles.errorLabel}>{errors.email}</Text>
               )}
               <TextInput
                 style={styles.input}
@@ -79,12 +79,12 @@ const Login = () => {
                 value={values.password}
               />
               {errors.password && (
-                <Text style={{fontSize: 10, color: 'red'}}>
-                  {errors.password}
-                </Text>
+                <Text style={styles.errorLabel}>{errors.password}</Text>
               )}
 
-              <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+              <TouchableOpacity
+                onPress={handleSubmit}
+                style={isValid ? styles.button : styles.buttonDisabled}>
                 {loading ? (
                   <Spinner
                     visible={true}
@@ -151,6 +151,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 150,
   },
+  buttonDisabled: {
+    backgroundColor: '#aeaeae',
+    borderRadius: 5,
+    marginTop: 20,
+    width: 150,
+  },
   buttonLabel: {
     color: 'white',
     padding: 10,
@@ -158,5 +164,27 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  errorLabel: {
+    fontSize: 12,
+    color: 'red',
+    fontWeight: 'bold',
+    backgroundColor: 'white',
+    paddingLeft: 10,
+    borderRadius: 3,
+    opacity: 0.8,
+  },
 });
-export default Login;
+
+
+function mapState(state){
+  const {isLoggedIn} = state.user;
+  return {isLoggedIn}
+}
+
+const actionCreators = {
+  loginAction: userActions.login
+}
+
+export default connect(mapState, actionCreators)(Login)
+
+

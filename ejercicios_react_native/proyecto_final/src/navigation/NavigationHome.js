@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../screens/container/Home';
-import Details from '../sections/components/details';
+import MovieDetails from '../sections/components/movieDetails';
 
 const Stack = createStackNavigator();
 
@@ -17,9 +17,10 @@ export default function NavigationHome() {
       />
       <Stack.Screen
         name="Details"
-        component={Details}
+        component={MovieDetails}
         options={{
-          headerShown: false,
+          headerShown: true,
+          title: "Detalles de la película"
         }}
       />
     </Stack.Navigator>

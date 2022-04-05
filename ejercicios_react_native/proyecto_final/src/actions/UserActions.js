@@ -1,17 +1,12 @@
-import {UserController} from '@/controllers';
-import {strings} from '@/localization';
+// import {UserController} from '@/controllers';
+import { useNavigation } from '@react-navigation/native';
+import {TYPES} from '../constants/types';
 
-export const TYPES = {
-  CLEAR_STORE: 'CLEAR_STORE',
-  LOGIN: 'LOGIN',
-  LOGIN_REQUEST: 'LOGIN_REQUEST',
-  LOGIN_ERROR: 'LOGIN_ERROR',
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-};
 
-const loginRequest = () => ({
+
+const loginRequest = emailUser => ({
   type: TYPES.LOGIN_REQUEST,
-  payload: null,
+  payload: {emailUser},
 });
 
 const loginSuccess = user => ({
@@ -29,30 +24,41 @@ const clearStore = () => ({
   payload: null,
 });
 
-export const login =
-  (username, password) =>
-  async (dispatch, _, {demoMode, networkService}) => {
-    try {
-      dispatch(loginRequest());
-      const userController = new UserController(networkService);
-      const {data} = await userController.login({username, password, demoMode});
-      if (!demoMode) {
-        networkService.setAccessToken(data.user.accessToken);
-      }
-      dispatch(loginSuccess(data.user));
-    } catch ({data}) {
-      dispatch(loginError(data?.error ?? strings.login.invalidCredentials));
-    }
-  };
+function login(emailUser, passwordUser){
+
+    return async (dispatch) => { 
+      return fetch("api/users/authenticate", {
+        method: 'POST',
+        body: JSON.stringify({emailUser,passwordUser})
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          if (json != null) { 
+            console.log('Acceso permitido')
+            dispatch(loginSuccess(json.user))
+          } else {
+            console.log('Acceso denegado')
+            dispatch(loginError('Credenciales inválidas'))
+          }
+        })
+        .catch((err) => {
+          dispatch(loginError(err.toString()))
+        }); 
+    };
+}
 
 export const logout =
   () =>
-  async (dispatch, _, {demoMode, networkService}) => {
+  async (dispatch) => {
     try {
-      const userController = new UserController(networkService);
-      await userController.logout({demoMode});
-    } finally {
-      networkService.clearAccessToken();
+      console.log("borrando")
       dispatch(clearStore());
+    } catch(err) {
+      console.log(err)
     }
   };
+
+export const userActions = {
+  login,
+  logout
+}

@@ -6,7 +6,6 @@ function VerticalSeparator(props) {
     <View
       style={[
         styles.separator,
-        // eslint-disable-next-line react-native/no-inline-styles
         {
           borderTopColor: props.color ? props.color : '#eaeaea',
         },
@@ -17,7 +16,7 @@ function VerticalSeparator(props) {
 
 const styles = StyleSheet.create({
   separator: {
-    borderTopWidth: 1,
+   margin:8
   },
 });
 

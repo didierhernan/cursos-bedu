@@ -11,6 +11,9 @@ import NavigationTab from './NavigationTab';
 import Profile from '../screens/container/Profile';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Hello from '../sections/components/hello';
+import { userActions } from '../actions/UserActions';
+import { connect } from 'react-redux';
+import store from '../store/store';
 
 const Drawer = createDrawerNavigator();
 
@@ -18,17 +21,15 @@ const DrawerNavigator = () => {
   function CustomDrawerContent(props) {
     const navigation = useNavigation();
     const handleClose = () => {
-      Store.remove({
-        key: 'userLogin',
-      });
-      navigation.navigate('Login',{
-        title:'Login-Test'
-      });
+      store.dispatch(userActions.logout())
+      navigation.navigate('Login');
     };
 
     return (
       <DrawerContentScrollView {...props}>
-        <Hello/>
+        <Hello
+          name={Store.getState().user.name}
+          photo={Store.getState().user.photo}/>
         <DrawerItemList {...props} />
         <DrawerItem
           name="logout"
@@ -42,11 +43,11 @@ const DrawerNavigator = () => {
 
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
+      initialRouteName="Movies"
       drawerContent={props => <CustomDrawerContent {...props} />}>
         
       <Drawer.Screen
-        name="Home"
+        name="Movies"
         component={NavigationTab}
         options={{
           title: 'Tu app de pelis',
@@ -84,4 +85,15 @@ const styles = {
   },
 };
 
-export default DrawerNavigator;
+// export default DrawerNavigator;
+
+function mapState(state){
+  const {user} = state;
+  return {user}
+}
+
+const actionCreators = {
+  logoutAction: userActions.logout
+}
+
+export default connect(mapState, actionCreators)(DrawerNavigator)
