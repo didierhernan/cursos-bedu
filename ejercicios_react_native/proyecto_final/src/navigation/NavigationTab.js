@@ -4,7 +4,6 @@ import {Image} from 'react-native';
 import NavigationHome from './NavigationHome';
 import Notes from '../screens/container/Notes';
 import Favorites from '../screens/container/Favorites';
-import FriendsScreen from '../screens/container/FriendsScreen'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Tab = createBottomTabNavigator();
@@ -26,21 +25,9 @@ const TabLayout = () => {
           tabBarIcon: (focused) => (
             <Icon name="star" size={23} style={[focused ? styles.drawerActive : styles.drawerInActive]} /> //color={color}
           ),
-          tabBarBadge:3,
+          tabBarBadge:2,
         }}
       />
-      {/* Tab-SearchScreen */}
-      {/* <Tab.Screen
-        name="Friends"
-        component={FriendsScreen}
-        options={{
-          tabBarLabel: 'Friends',
-          tabBarIcon: (focused,color, size) => (
-            <Icon name="star" size={23} style={[focused ? styles.drawerActive : styles.drawerInActive]} /> //color={color}
-          ),
-        }}
-      /> */}
-      {/* Tab-DealsScreen */}
       <Tab.Screen
         name="Home"
         options={{

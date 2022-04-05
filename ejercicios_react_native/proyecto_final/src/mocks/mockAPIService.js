@@ -27,6 +27,24 @@ export function makeServer (){
             }
           })
 
+          this.get('/favorites', (schema=>{
+              return{
+                  favorites:[
+                    {id: 2, name: 'Spider-Man: No Way Home', year: '2021', rate: 'PG-13', rating: 4.4, votes:34769, duration: '2h 38m', 
+                    photo:'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/poster-spider-man-no-way-home-1637136793.jpg',
+                    description: 'Tras descubrirse la identidad secreta de Peter Parker como Spider-Man, la vida del joven se vuelve una locura. Peter decide pedirle ayuda al Doctor Extraño para recuperar su vida. Pero algo sale mal y provoca una fractura en el multiverso.',
+                    trailerId:'JfVOs4VSpmA'},
+                    {id: 3, name: 'Joker', year: '2019', rate: 'R', rating: 5, votes:948761, duration: '2h 2m', 
+                    photo:'https://static.wikia.nocookie.net/batman/images/6/68/Joker_poster.png/revision/latest?cb=20190428190747&path-prefix=es',
+                    description: 'Arthur Fleck adora hacer reír a la gente, pero su carrera como comediante es un fracaso. El repudio social, la marginación y una serie de trágicos acontecimientos lo conducen por el sendero de la locura y, finalmente, cae en el mundo del crimen.',
+                    trailerId:'WwkZqhpE0E4'},
+
+
+                  ]
+              }
+          }))
+
+
           this.get('/movies', (schema) => {
             return {
               movies: [
